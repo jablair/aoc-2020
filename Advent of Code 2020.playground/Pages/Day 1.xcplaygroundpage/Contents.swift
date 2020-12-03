@@ -7,7 +7,7 @@ guard let expenseFile = Bundle.main.url(forResource: "expenses", withExtension: 
     exit(0)
 }
 
-let entries: [Int] = parseFile(at: expenseFile) { Int($0) }
+let entries: [Int] = parseFile(at: expenseFile, transform: Int.init)
 
 /*: Problem 1 */
 var v1 = 0
