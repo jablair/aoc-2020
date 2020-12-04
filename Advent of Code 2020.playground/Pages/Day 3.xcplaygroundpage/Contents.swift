@@ -13,11 +13,11 @@ struct TreePositions {
         }
         self.count = pattern.count
         
-        self.treeIndexes = Set(pattern.enumerated().filter{
-            $0.1 == Character("#")
-        }.map {
-            $0.0
-        })
+        self.treeIndexes =  pattern.enumerated().reduce(into: Set<Int>()) { indexes, each in
+            if each.1 == Character("#") {
+                indexes.insert(each.0)
+            }
+        }
     }
     
     func isTree(at position: Int) -> Bool {
