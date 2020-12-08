@@ -85,13 +85,15 @@ extension Array where Element == Operation {
 
         let fixPositionCandidates = enumerated().compactMap { (idx, instruction) -> Int? in
             switch instruction {
-            case .jump, .noOp:
+            case .jump:
                 return idx
+            case .noOp(let count):
+                return count != 0 ? idx : nil // jmp 0 is infinite loop
             case .accumulate:
                 return nil
             }
         }
-        
+
         for fixIdx in fixPositionCandidates {
             var fixed = self
             fixed[fixIdx] = fixed[fixIdx].flipped
