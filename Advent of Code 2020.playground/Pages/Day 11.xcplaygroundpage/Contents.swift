@@ -14,24 +14,7 @@ enum Position: Character {
     }
 }
 
-let sample = """
-L.LL.LL.LL
-LLLLLLL.LL
-L.L.L..L..
-LLLL.LL.LL
-L.LL.LL.LL
-L.LLLLL.LL
-..L.L.....
-LLLLLLLLLL
-L.LLLLLL.L
-L.LLLLL.LL
-"""
-
 typealias Floorplan = [[Position]]
-
-//let rows: Floorplan = sample.components(separatedBy: "\n").compactMap { eachRow in
-//    eachRow.compactMap(Position.init)
-//}
 
 guard let floorplanURL = Bundle.main.url(forResource: "floorplan", withExtension: "txt") else {
     exit(0)
@@ -235,6 +218,8 @@ extension Floorplan {
 
 var iterationCount = 0
 var lastIteration = rows
+
+//: Problem 1
 while (true) {
     let iteration = try lastIteration.iteratedFloorplan(scheme: .adjacent)
 
@@ -253,7 +238,7 @@ let occupiedCount = lastIteration.reduce(0) { count, row -> Int in
 
 print("Filled seats with adjacent rules: \(occupiedCount)")
 
-// Problem 2
+//: Problem 2
 
 iterationCount = 0
 lastIteration = rows
